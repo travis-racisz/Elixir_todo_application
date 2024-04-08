@@ -17,7 +17,7 @@ defmodule Todoapplication.TaskController do
         where: t.id == ^id,
         select: t
 
-    Repo.all(query)
+    Repo.one(query)
   end
 
   def create_task(attrs) do
@@ -35,5 +35,9 @@ defmodule Todoapplication.TaskController do
   def delete_task(id) do
     get_task!(id)
     |> Repo.delete()
+  end
+
+  def change_task(%Task{} = task, attrs \\ %{}) do
+    Task.changeset(task, attrs)
   end
 end

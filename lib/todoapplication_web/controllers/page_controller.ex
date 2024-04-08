@@ -1,9 +1,9 @@
 defmodule TodoapplicationWeb.PageController do
+  alias Todoapplication.TaskController
   use TodoapplicationWeb, :controller
 
   def home(conn, _params) do
-    # The home page is often custom made,
-    # so skip the default app layout.
-    render(conn, :home, layout: false)
+    todos = TaskController.get_all_tasks()
+    render(conn, :home, todos: todos)
   end
 end
